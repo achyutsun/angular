@@ -8,6 +8,11 @@ export * from '../src/web_workers/shared/render_view_with_fragments_store';
 export * from '../src/core/render/api';
 export * from '../src/core/change_detection';
 export * from '../src/core/di';
+export * from '../src/animate/animation';
+export * from '../src/animate/animation_builder';
+export * from '../src/animate/browser_details';
+export * from '../src/animate/css_animation_builder';
+export * from '../src/animate/css_animation_options';
 export {Reflector, ReflectionInfo} from '../src/core/reflection/reflection';
 export {
   PlatformReflectionCapabilities
