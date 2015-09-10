@@ -84,6 +84,9 @@ module.exports = function makeBrowserTree(options, destinationPath) {
     destDir: '/'
   });
 
+  var rxJs = new Funnel('node_modules/@reactivex/rxjs/dist/cjs',
+                        {include: ['**/**'], destDir: '/@reactivex'});
+
   var es5ModulesTree = new Funnel('modules', {
     include: ['**/**'],
     exclude: ['**/*.cjs', 'angular1_router/**', 'benchmarks/e2e_test/**'],
@@ -141,7 +144,6 @@ module.exports = function makeBrowserTree(options, destinationPath) {
       'node_modules/zone.js/dist/zone-microtask.js',
       'node_modules/zone.js/dist/long-stack-trace-zone.js',
       'node_modules/systemjs/dist/system.src.js',
-      'node_modules/rx/dist/rx.js',
       'node_modules/base64-js/lib/b64.js',
       'node_modules/reflect-metadata/Reflect.js',
       path.relative(projectRootDir, traceur.RUNTIME_PATH)
@@ -210,8 +212,8 @@ module.exports = function makeBrowserTree(options, destinationPath) {
 
   htmlTree = mergeTrees([htmlTree, scripts, polymer, react]);
 
-  es5Tree = mergeTrees([es5Tree, htmlTree, assetsTree]);
-  es6Tree = mergeTrees([es6Tree, htmlTree, assetsTree]);
+  es5Tree = mergeTrees([es5Tree, htmlTree, assetsTree, rxJs]);
+  es6Tree = mergeTrees([es6Tree, htmlTree, assetsTree, rxJs]);
 
   var mergedTree = mergeTrees([stew.mv(es6Tree, '/es6'), stew.mv(es5Tree, '/es5')]);
 
